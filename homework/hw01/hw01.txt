@@ -1,0 +1,153 @@
+COSC 301: Operating Systems: Homework 1
+---------------------------------------
+
+ * Due Weds, Aug 29 
+
+Overview
+--------
+
+A *shell is one of the most important ways of interacting with
+a UNIX-like operating system.  A shell provides a command-line
+interface with a set of commands to interact with the OS.  The shell
+allows a user to run programs and otherwise interact directly with the
+operating system.  There are many different shells available for
+UNIX-like systems: sh, bash, tcsh, csh, ksh, and zsh are the most well
+known ones.  In this lab, you'll get some practice working with a bash
+shell and writing simple shell scripts and commands.
+
+In preparation for this lab, you should have read the three pages
+under Linux on Google's Tools 101 page, available at:
+http://code.google.com/edu/tools101/index.html.  Many steps
+below assume that you've done the reading, but you may still need
+to refer to those pages.
+
+You should also have a working bash shell to use on a Linux
+system.  I recommend installing virtualbox (http://virtualbox.org)
+and then downloading and installing the virtual machine appliance
+available on Moodle.  
+
+Create a file named submit.txt and write answers to the following
+questions in that file (which you will submit to Moodle).
+
+
+1. You'll see a file named systems.txt in the current folder.
+   Change the permissions of systems.txt so that only you can read
+   and write to it.  In submit.txt, write the command that you
+   used to do so.
+
+2. Make a "shell script" to do the same thing as the last question.
+   Edit a file named perms.sh.  Add the following text as the first
+   line in the file:
+
+#!/bin/bash
+
+   This line tells the OS that the file is a script written in a 
+   language that the program located in /bin/bash can interpret.  
+   Include two other lines in perms.sh: one to change the permissions
+   of systems.txt (as you did in the previous problem), and another
+   line to list the file permissions in order to verify them.
+   Lastly, change the file permissions of |perms.sh| so that you have
+   execute permission.
+
+   In submit.txt, include the contents of perms.txt, and additionally
+   write out the command you used to change the permissions for perms.sh.
+
+3. Now run your fancy shell script perms.sh by typing the following:
+
+$ ./perms.sh
+
+   (Note that the $ just indicates the shell prompt.)
+
+   What does the dot (.) refer to in the above command?  Why do we need
+   to use ./ to refer to the shell script?  Write answers to these two
+   questions in submit.txt.  
+
+
+
+
+The remaining problems involve constructing "command pipelines".  
+You might want to review the page "Greppin' the GNU world" in the reading
+for more on pipelines.  For each of the problems below, construct
+a pipeline that does what is required, and copy/paste that command
+line into submit.txt.  You may need to refer to man pages for
+different commands, but you should not have to use any commands
+other than grep, wc, ps, awk, sort, uniq, whoami, find, xargs, du, 
+and ls (and you may not need to use all these commands).  
+
+Two notes:
+  a.  An example pipeline appears next as a way to show you a semi-complex
+      command line.  
+  b.  The find, xargs, and du commands are potentially only used with 
+      the last problem.
+  
+
+Example:
+
+     First, an example pipeline that also introduces a few new programs:
+     ps, awk, sort, and head.  The following pipeline prints the
+     name of the process and the amount of memory consumed for the three
+     biggest memory hogs running on the entire system:
+
+
+        $ ps auxww | awk '{print $5, $11}' | sort -k1 -nr | head -3
+   
+
+     Here's what the different components do:
+
+     a. ps will show the status of processes running on the
+        operating system; auxww is just an odd option to modify how the
+        output of ps looks (see the man page).
+     b. awk can be used to pick out specific white-space delimited
+        "fields" from a line of text.  In the pipeline above, we just
+        print out the 5th (memory consumed) and 11th (process name) fields
+        (field numbers start at 1).
+     c. The sort does exactly what you think.  The -k1 option says
+        to use the first field (memory consumed) as the field to sort on.
+        The -n option specifies a numeric sort (as opposed to a
+        lexicographic sort).  The -r option is to do a reverse sort.
+        Thus, we'll get all the processes sorted from largest memory
+        consumer to smallest memory consumer.
+     d. head will print out the "head" of a file.  In this case,
+        we're not printing the head of a file per se, but rather the
+        head of the output from the previous step of the pipeline.  You
+        can specify how many lines to print as an option.  Above, we ask
+        for the first 3 lines.  (By default, you get 10 lines.)
+
+       See the man pages of these commands for more details.
+
+
+4. Write a command pipeline to print the number of lines that
+   contain the letter 'x' in systems.txt.  (Hint: refer to the Google
+   tutorial regarding the wc and grep tools.)
+
+
+5. Construct a command pipeline to print the number of lines in the
+   file systems.txt that *do not* contain the string 'os'.
+   (You may need to refer to the man page for grep.)
+
+
+6. Write a command pipeline to print out all the processes running
+   under your username, sorted from highest memory consumer to
+   smallest.
+
+   Restriction: in the command pipeline, don't refer to your username
+   directly, but use the whoami program to get it.  (A hint: you can
+   use "backticks" (`) around a program name to have the output of
+   that program substituted in place.  Try it, and think about how you
+   might leverage the power of grep.)
+
+
+7. Write a command pipeline to print the number of processes
+   running as different users on the system, sorted by the number of
+   processes, highest to lowest.  That is, if there are 19 processes
+   running as foo and 13 processes running as bar, your output
+   should look like:
+
+   19 foo
+   13 bar
+
+   You'll want to use the uniq command to construct this pipeline.  It
+   removes any duplicate lines from its input stream, and writes the
+   unique lines to its output stream.  See the man page for more
+   details.
+
