@@ -1,0 +1,42 @@
+COSC 301: Operating Systems - Homework 2
+========================================
+
+Due Tuesday, September 4, 2012
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Write a (weird) C function that takes a C string and returns the
+   average of the values of each of the characters in the string in the
+   form of an int.  You can assume that the string passed as a parameter is
+   valid.  The function prototype should be::
+
+    int avgchar(char *mystring);
+
+2. Write a C function that mimicks the ``charAt`` method for the String
+   class in Java. The function can take a string and an index, and just
+   return the char at the specified index. On error, the function should
+   return -1.  You can assume that the string passed as a parameter is
+   valid, but you should not assume anything about the index. The function
+   prototype should be::
+
+    char charat(char *mystring, int index);
+
+3. Write a C function called ``string_in`` that takes two ``char *`` as
+   arguments.  If the second string is contained within the first string,
+   the function should return the address at which the contained string
+   begins.  The match should be done in a case-insensitive way.  For
+   example, ``string_in("hats!", "AT")`` should return the address of
+   ``'a'`` in ``"hats!"``. If the second string is not contained within the
+   first string, the function should just return ``NULL``.
+
+4. Write a ``strncmp`` function that takes two strings and a maximum
+   length, and compares the strings (in a case-sensitive manner).  You 
+   should only compare, at most, the maximum number of characters supplied 
+   in the parameter (you may compare fewer characters).  Return 0 on a 
+   match, -1 if the first string appears lexicographically before the 
+   second string, and 1 otherwise.
+
+For any of the above questions, you can *not* use any built-in C string
+processing function except ``strlen``. 
+
+You can just include all three functions in a single text file to
+upload.  (Plain text please; no word processing formats.)
