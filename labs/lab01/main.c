@@ -14,7 +14,8 @@ int main(int argc, char **argv)
     /*    test of whitespace removal      */
     /* ********************************** */
     printf("remove whitespace: before <%s>", orig);
-    printf(" and after <%s>\n", removewhitespace(copy));
+		removewhitespace(copy);
+    printf(" and after <%s>\n", copy);
     free(copy);                    // free modified copy
  
     /* ********************************** */
@@ -24,7 +25,7 @@ int main(int argc, char **argv)
     char *pascalstr = c2pascal(copy);
     printf("made pascal string out of %s; orig strlen was %d and pascal strlen is %d\n", orig, (int)strlen(orig), (int)pascalstr[0]);
     char *cstr = pascal2c(pascalstr);
-    printf("converted pascal string back to c.  orig: <%s> reconversion: <%s>\n", orig, cstr);
+    printf("converted pascal string back to c.\n  orig: <%s> reco: <%s>\n", orig, cstr);
     free(copy);
  
     /* ********************************** */
