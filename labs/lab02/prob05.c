@@ -7,9 +7,11 @@ struct node {
     struct node *next; 
 };
 
-void insert(char *name,  ... ) {
-
-
+void insert(char *name, struct node **phead) {
+	struct node *newnode = malloc(sizeof(struct node));
+	strncpy(newnode->name, name, 128);
+	newnode->next = *phead;
+	*phead = newnode;
 }
 
 void print_list(struct node *list) {
@@ -39,7 +41,7 @@ int main(int argc, char **argv)
     fflush(stdout);
     while (fgets(buffer, 128, stdin) != NULL) {
 
-        insert(buffer, ... );
+        insert(buffer, &head);
 
         printf("Next string to add: ");
         fflush(stdout);

@@ -3,4 +3,5 @@ Daniel Swiecki
 #2- My program is in lab02.c
 #3- My program is in fork03.c
 #4- My program is in broken.c
-#5- 
+I had to allocate space on the heap for buffer and then free both the strduped string in main and the returned buffer in main.
+#5- My code is in prob05.c. We did this pretty much together.

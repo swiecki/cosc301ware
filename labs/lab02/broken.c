@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <stdlib.h>
 char *remove_whitespace(char *s) {
-    char buffer[strlen(s) + 1];
+    char *buffer = malloc(sizeof(char)*(strlen(s)+1));
     int i = 0, j = 0;
     for ( ; i < strlen(s); i += 1) {
         if (!isspace(s[i])) {
@@ -20,5 +20,7 @@ int main(int argc, char **argv) {
     char *s = strdup("  the \tinternet\t\nis a series of tubes  ");
     char *newstr = remove_whitespace(s);
     printf("%s\n", newstr);
-    return 0;
+    free(s);
+		free(newstr);
+		return 0;
 }
