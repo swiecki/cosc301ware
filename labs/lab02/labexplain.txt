@@ -1,0 +1,6 @@
+Daniel Swiecki
+#1- This program forks itself, and then the child prints "Or am I" while the parent prints "Who are you?"
+#2- My program is in lab02.c
+#3- My program is in fork03.c
+#4- My program is in broken.c
+#5- 
