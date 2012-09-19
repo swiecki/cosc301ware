@@ -3,21 +3,18 @@
 #include <string.h>
 #include <ctype.h>
 
-void
-removewhitespace(char *s1)
+void removewhitespace(char *s1)
 {
     // remove whitespace from a string, in place
-    if (!s1)
+    if (s1 == NULL){
         return;
-    
-    char *s2 = strdup(s1);
-    free(s1);
-    char *buffer = malloc(sizeof(s2));
+    }
+    char buffer[strlen(s1)+1];
     int i = 0;
     int j = 0;
-    for (; i < strlen(s2); i++) {
-        if (!isspace(s2[i])) {
-            buffer[j] = s2[i];
+    for (; i < strlen(s1); i++) {
+        if (!isspace(s1[i])) {
+            buffer[j] = s1[i];
             j++;
         }
     }
@@ -26,47 +23,46 @@ removewhitespace(char *s1)
 }
 
 
-char**
-tokenify(char *s)
+char** tokenify(char *s)
 {
     const char *sep=" \t\n";
     char *word = NULL;
-
+		//copy string
+		char *temp1 = strdup(s);
+		char *temp2 = strdup(s);
     // find out exactly how many tokens we have
     int words = 0;
-    for (word = strtok(s, sep);
-         word;
-         word = strtok(NULL, sep)) words++ ;
+    for (word = strtok(temp1, sep);word; word = strtok(NULL, sep)){ words++;}
 
     printf("words: %d\n", words);
     printf("s: %s\n", s);
 
     // allocate the array of char *'s, with one additional
-    char **array = (char **)malloc(sizeof(char)*(words+1));
+    char **array = malloc(sizeof(char*)*(words+1));
     int i = 0;
-    for (word = strtok(s, sep);
-         word;
-         word = strtok(NULL, sep)) {
+    for (word = strtok(temp2, sep); word; word = strtok(NULL, sep)) {
         printf("adding word %s to array pos %d\n", word, i);
         array[i] = strdup(word);
         i++;
     }
+		free(temp1);
+		free(temp2);
+		array[words] = NULL;
     return array;
 }
 
-void
-printtokens(char **tokenlist) {
-    char *tmp = tokenlist[0];
-    int toknum = 0;
+void printtokens(char **tokenlist) {
+		int toknum = 0;
     printf("Printing tokens:\n");
-    while (tmp != NULL) {
-        printf("\t%d: <%s>\n", toknum, tmp);
+    while (tokenlist[toknum] != NULL) {
+        printf("\t%d : <%s>\n", toknum, tokenlist[toknum]);
+				free(tokenlist[toknum]);
         toknum++;
     }
+		free(tokenlist);
 }
 
-int
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
     char s1[] = "  the \tinternet is a series of tubes  ";
     char s2[] = "   \t\n";
     char s3[] = "  the \tinternet is not a series of tubes  ";
