@@ -1,7 +1,7 @@
 COSC 301: Operating Systems
 ===========================
 
-Lab 3: Measuring the cost of a system call
+Lab 4: Measuring the cost of a system call
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this lab, you'll empirically measure the costs of a system call,
