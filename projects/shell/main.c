@@ -40,8 +40,10 @@ main(int argc, char **argv) {
             /* in child */
             if (execv(cmd[0], cmd) < 0) {
                 fprintf(stderr, "execv failed: %s\n", strerror(errno));
-            }
 
+                // only way we get here is if execv fails.
+                exit(-1);
+            } 
         } else if (p > 0) {
             /* in parent */
             int rstatus = 0;
@@ -52,7 +54,7 @@ main(int argc, char **argv) {
                same process id */ 
             assert(p == childp);
 
-            printf("Parent got carcass of child process %d, return val %d\n", childp, rstatus);
+            printf("Parent got carcass of child process %d, return val %d\n", childp, WEXITSTATUS(rstatus));
         } else {
             /* fork had an error; bail out */
             fprintf(stderr, "fork failed: %s\n", strerror(errno));
