@@ -28,8 +28,9 @@ instruction available on x86 machines (a short example is given
 below).  This instruction reads the current value of a cycle timer;
 you’ll have to convert the results to seconds yourself of course.
 
-You should measure three separate system calls; which three you
-measure is entirely up to you.  Here are just some of the
+You should measure two separate system calls; which two you
+measure is entirely up to you, but they should reasonably
+different types of calls.  Here are just some of the
 possibilities: ``stat()``, ``read()``, ``write()``, ``getpid()``,
 ``gethostname()``, ``gettimeofday()``, ``pipe()``, ``fork()``,
 ``signal()``, and ``select()`` (or ``poll()``).  Any of these should
@@ -38,7 +39,7 @@ be relatively straightforward to use (note that with ``read()`` and
 zero bytes from a file, or write zero bytes to ``/dev/null``, a
 special "black hole" file).
 
-When you have computed the average time for each of your three system
+When you have computed the average time for each of your two system
 calls, write the average cost on the board (we'll create a big table).
 
 Before you leave the lab 
@@ -46,9 +47,7 @@ Before you leave the lab
 
  1. Demo/show your code to me
 
- 2. Turn your code in via Moodle (it should be short!)
-
- 3. Wait until we've discussed the results on the board
+ 2. Wait until we've discussed the results on the board
 
 
 Example of using ``getttimeofday`` and ``rdtsc`` assembly call
