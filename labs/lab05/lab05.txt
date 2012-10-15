@@ -5,7 +5,7 @@ Lab 5: Threads
 
 0.  The ``pthreads`` API
 
-    `pthreads`` is a standard library available on many operating systems that
+    ``pthreads`` is a standard library available on many operating systems that
     provides a portable API for creating threads, using mutex locks, and other
     thread-related operations. Item 0 in this lab is just an overview of a
     couple functions in the ``pthreads`` library. Exercise 3 introduces a few
@@ -70,7 +70,7 @@ Lab 5: Threads
             
     Lastly, it is important to note that special flags to a compiler are often
     required to correctly compile a multithreaded program. Typically, this flag
-    is `-pthread` on gcc. You'll notice that in the ``Makefile`` for this lab,
+    is ``-pthread`` on gcc. You'll notice that in the ``Makefile`` for this lab,
     ``CFLAGS`` includes this flag to tell gcc that we're using the pthreads
     library.
 
@@ -83,7 +83,8 @@ Lab 5: Threads
     moving on.  Really.
 
 2. What is the output of the following program? (You should just hand-trace it
-   - Don't compile and run it.)
+   - Don't compile and run it.)  Remember that threads share the same address
+   space.
 
 ::
 
@@ -157,8 +158,8 @@ Lab 5: Threads
 
          pthread_mutex_destroy(&happy_mutex);
 
-    Note: all these call *do* return values.  You should read the ``man``
-    pages to find out more about how their behavior.
+    Note: all these function calls *do* return values.  You should read the 
+    ``man`` pages to find out more about how their behavior.
 
     Don't forget to test ``threadshare`` once you've fixed the race.
     
